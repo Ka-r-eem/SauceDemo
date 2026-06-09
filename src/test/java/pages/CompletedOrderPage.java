@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class CompletedOrderPage extends BasePage{
 
 
-    By backToHome = By.id("back-to-products");
+    public static final By backToHome = By.id("back-to-products");
 
     public CompletedOrderPage(WebDriver driver) {
         super(driver);
@@ -15,7 +15,7 @@ public class CompletedOrderPage extends BasePage{
     public void backToHomePage() {
         System.out.println("Current URL Before Click: "
                 + driver.getCurrentUrl());
-        driver.findElement(backToHome).click();
+       click(backToHome);
     }
    public boolean isNavigatedToHome(){
         return driver.getCurrentUrl().contains("inventory");

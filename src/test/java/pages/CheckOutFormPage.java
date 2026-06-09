@@ -7,6 +7,7 @@ public class CheckOutFormPage extends BasePage{
     By firstname = By.id("first-name");
     By lastname = By.id("last-name");
     By code  = By.id("postal-code");
+    By ctnBtn = By.id("continue");
 
     public CheckOutFormPage(WebDriver driver) {
         super(driver);
@@ -14,10 +15,10 @@ public class CheckOutFormPage extends BasePage{
 
 
     public void checkoutFormFill(String _firstname, String _lastname, String _code){
-        driver.findElement(firstname).sendKeys(_firstname);
-        driver.findElement(lastname).sendKeys(_lastname);
-        driver.findElement(code).sendKeys( _code);
-        driver.findElement(By.id("continue")).click();
+        type(firstname, _firstname);
+        type(lastname, _lastname);
+        type(code, _code);
+        click(ctnBtn);
 
     }
 

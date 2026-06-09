@@ -1,27 +1,34 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 public class LoginPage extends BasePage {
-    By username = By.id("user-name");
-    By password = By.id("password");
-    By login = By.id("login-button");
 
+    // Locators
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.id("password");
+    private final By loginButton = By.id("login-button");
+    private final By errorMessage = By.cssSelector("[data-test='error']");
+
+    // Constructor
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void login(String user, String pass){
-            driver.findElement(username).sendKeys(user);
-            driver.findElement(password).sendKeys(pass);
-            driver.findElement(login).click();
-
-
-
+    // Actions
+    public void login(String username, String password) {
+        type(usernameField, username);
+        type(passwordField, password);
+        click(loginButton);
     }
-   public boolean isLoginSuccessful(){
-            return driver.getCurrentUrl().contains("inventory");
-        }
 
+    // Validations (NO Assertions here - only checks)
+    public boolean isLoginSuccessful() {
+        return driver.getCurrentUrl().contains("inventory");
+    }
+
+    public boolean isErrorDisplayed(By errorMessage) {
+        return isErrorDisplayed(this.errorMessage);
+    }
 }

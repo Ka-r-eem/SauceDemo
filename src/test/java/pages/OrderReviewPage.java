@@ -23,15 +23,11 @@ public class OrderReviewPage extends BasePage {
         WebDriverWait wait =
                 new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(
-                ExpectedConditions.elementToBeClickable(finish)
-        );
+        waitForClickable(finish);
 
-        driver.findElement(finish).click();
+       click(finish);
 
-        wait.until(
-                ExpectedConditions.urlContains("checkout-complete")
-        );
+        waitForVisible(pageTitle);
 
 
     }

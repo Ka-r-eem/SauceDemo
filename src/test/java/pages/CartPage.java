@@ -16,6 +16,6 @@ public class CartPage extends BasePage{
         driver.findElement(checkout).click();
     }
     public void remove() {
-        driver.findElement(remove).click();
+        click(remove);
     }
 }

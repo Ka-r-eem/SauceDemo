@@ -1,48 +1,48 @@
-import org.openqa.selenium.WebDriver;
+
+import DataProviders.CombinedDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
-public class CompletePurchaseTest extends BaseTest {
+public class CompletePurchaseTest extends BaseTest{
 
+    @Test(dataProvider = "fullFlowData", dataProviderClass = CombinedDataProvider.class)
+    public void completePurchaseFlow(
+            String username,
+            String password,
+            String firstName,
+            String lastName,
+            String zip
+    ) {
 
-    @Test
-    public void completePurchaseFlow() {
+        // Pages initialization (مهم جدًا لو مش في BaseTest)
+        LoginPage loginPage = new LoginPage(driver);
+        ProductsPage productsPage = new ProductsPage(driver);
+        CartPage cartPage = new CartPage(driver);
+        CheckOutFormPage checkoutPage = new CheckOutFormPage(driver);
+        OrderReviewPage orderReviewPage = new OrderReviewPage(driver);
+        CompletedOrderPage completedOrderPage = new CompletedOrderPage(driver);
 
-        LoginPage loginPage =
-                new LoginPage(driver);
+        // 🔐 LOGIN
+        loginPage.login(username, password);
+        Assert.assertTrue(loginPage.isLoginSuccessful());
 
-        Products_page productsPage =
-                new Products_page(driver);
-
-        CartPage cartPage =
-                new CartPage(driver);
-
-        CheckOutFormPage checkoutPage =
-                new CheckOutFormPage(driver);
-
-        OrderReviewPage orderReviewPage =
-                new OrderReviewPage(driver);
-
-        CompletedOrderPage completedOrderPage =
-                new CompletedOrderPage(driver);
-
-        loginPage.login(
-                "standard_user",
-                "secret_sauce"
-        );
-        Assert.assertTrue(
-                loginPage.isLoginSuccessful()
-        );
+        // 🛒 ADD TO CART + GO
         productsPage.addItemToCart();
         productsPage.goToCartPage();
+
+        // 🛒 CART
         cartPage.checkOut();
-        checkoutPage.checkoutFormFill("kareem", "amin", "00000");
+
+        // 🧾 CHECKOUT
+        checkoutPage.checkoutFormFill(firstName, lastName, zip);
+
+        // 🧾 FINISH ORDER
         orderReviewPage.finishOrder();
+
+        // 🏠 BACK HOME
         completedOrderPage.backToHomePage();
+
         Assert.assertTrue(completedOrderPage.isNavigatedToHome());
-        System.out.println("We are in Product Pade Nowwww");
-
-
     }
 }
