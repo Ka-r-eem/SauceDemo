@@ -3,14 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CompletedOrderPage {
-    private WebDriver driver;
+public class CompletedOrderPage extends BasePage{
 
-    public CompletedOrderPage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     By backToHome = By.id("back-to-products");
+
+    public CompletedOrderPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void backToHomePage() {
         System.out.println("Current URL Before Click: "

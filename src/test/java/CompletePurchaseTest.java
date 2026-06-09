@@ -1,8 +1,10 @@
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
 public class CompletePurchaseTest extends BaseTest {
+
 
     @Test
     public void completePurchaseFlow() {

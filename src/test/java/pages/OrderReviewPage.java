@@ -7,16 +7,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class OrderReviewPage {
+public class OrderReviewPage extends BasePage {
 
-    private WebDriver driver;
-
-    public OrderReviewPage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     By finish = By.id("finish");
     By pageTitle = By.className("title");
+
+    public OrderReviewPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void finishOrder() {
 

@@ -3,14 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CartPage {
-    private WebDriver driver;
-    public CartPage(WebDriver driver) {
-        this.driver = driver;
-    }
-    By checkout =By.id("checkout");
+public class CartPage extends BasePage{
 
+    By checkout =By.id("checkout");
     By remove = By.id("remove-sauce-labs-backpack");
+
+    public CartPage(WebDriver driver) {
+        super(driver);
+    }
 
     public void checkOut() {
         driver.findElement(checkout).click();
