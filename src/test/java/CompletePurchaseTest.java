@@ -15,7 +15,6 @@ public class CompletePurchaseTest extends BaseTest{
             String zip
     ) {
 
-        // Pages initialization (مهم جدًا لو مش في BaseTest)
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = new ProductsPage(driver);
         CartPage cartPage = new CartPage(driver);
@@ -23,24 +22,24 @@ public class CompletePurchaseTest extends BaseTest{
         OrderReviewPage orderReviewPage = new OrderReviewPage(driver);
         CompletedOrderPage completedOrderPage = new CompletedOrderPage(driver);
 
-        // 🔐 LOGIN
+        //Login
         loginPage.login(username, password);
         Assert.assertTrue(loginPage.isLoginSuccessful());
 
-        // 🛒 ADD TO CART + GO
+        //Add to cart
         productsPage.addItemToCart();
         productsPage.goToCartPage();
 
-        // 🛒 CART
+        // CheckOut
         cartPage.checkOut();
 
-        // 🧾 CHECKOUT
+        //Fill Form
         checkoutPage.checkoutFormFill(firstName, lastName, zip);
 
-        // 🧾 FINISH ORDER
+        //Finish Order
         orderReviewPage.finishOrder();
 
-        // 🏠 BACK HOME
+        //Back To Home
         completedOrderPage.backToHomePage();
 
         Assert.assertTrue(completedOrderPage.isNavigatedToHome());
